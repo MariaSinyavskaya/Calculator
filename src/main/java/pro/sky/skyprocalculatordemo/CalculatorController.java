@@ -21,22 +21,42 @@ public class CalculatorController {
     }
 
     @GetMapping(path = "/plus")
-    public String calculateSummation(@RequestParam("num1") int num1,@RequestParam("num2") int num2) {
-            return calculatorServiceImpl.calculateSummation(num1, num2);
+    public String calculateSummation(@RequestParam(value = "num1", required = false) Integer num1,@RequestParam(value = "num2", required = false) Integer num2) {
+        if (num1  == null || num2 == null) {
+            return "Некорректный запрос";
+        }else {
+            return num1 + " + " + num2 + " = " + calculatorServiceImpl.calculateSummation(num1, num2);
+        }
     }
 
     @GetMapping(path = "/minus")
-    public String calculateSubtraction(@RequestParam("num1") int num1,@RequestParam("num2") int num2) {
-        return calculatorServiceImpl.calculateSubtraction(num1, num2);
+    public String calculateSubtraction(@RequestParam(value = "num1", required = false) Integer num1,@RequestParam(value = "num2", required = false) Integer num2) {
+        if (num1  == null || num2 == null) {
+            return "Некорректный запрос";
+        }else {
+            return num1 + " - " + num2 + " = " + calculatorServiceImpl.calculateSubtraction(num1, num2);
+        }
     }
 
     @GetMapping(path = "/multiply")
-    public String calculateMultiplication(@RequestParam("num1") int num1,@RequestParam("num2") int num2) {
-        return calculatorServiceImpl.calculateMultiplication(num1, num2);
+    public String calculateMultiplication(@RequestParam(value = "num1", required = false) Integer num1,@RequestParam(value = "num2", required = false) Integer num2) {
+        if (num1  == null || num2 == null) {
+            return "Некорректный запрос";
+        }else {
+            return num1 + " * " + num2 + " = " + calculatorServiceImpl.calculateMultiplication(num1, num2);
+        }
     }
 
     @GetMapping(path = "/divide")
-    public String calculateDivision(@RequestParam("num1") int num1,@RequestParam("num2") int num2) {
-        return calculatorServiceImpl.calculateDivision(num1, num2);
+    public String calculateDivision(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if (num1  == null || num2 == null) {
+            return "Некорректный запрос";
+        }else {
+            if (num2 != 0) {
+                return num1 + " : " + num2 + " = " + calculatorServiceImpl.calculateDivision(num1, num2);
+            } else {
+                return "num2 не может равняться нулю!";
+            }
+        }
     }
 }
